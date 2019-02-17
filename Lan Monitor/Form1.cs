@@ -64,5 +64,18 @@ namespace Lan_Monitor {
         private void TextBox5_Click(object sender, EventArgs e) {
             textBox5.Text = "";
         }
+
+        private void Form1_Resize(object sender, EventArgs e) {
+            if(this.WindowState == FormWindowState.Minimized) {
+                Hide();
+                notifyIcon1.Visible = true;
+            }
+        }
+
+        private void notifyIcon1_DoubleClick(object sender, EventArgs e) {
+            Show();
+            this.WindowState = FormWindowState.Normal;
+            notifyIcon1.Visible = false;
+        }
     }
 }
