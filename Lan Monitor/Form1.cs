@@ -19,11 +19,42 @@ namespace Lan_Monitor {
 
         string hostName = Dns.GetHostName();
         DriveInfo[] allDrives = DriveInfo.GetDrives();
+        IPAddress google = IPAddress.Parse("8.8.8.8");
 
         public Form1() {
             InitializeComponent();
-            GetLocalInformation();
+            GetLocalInformation();            
         }//starts the form, and displays local machine information
+
+        private void TraceRoute() {
+            for (int i = 1; i < 20; i++) {
+                IPAddress ip = GetTraceRoute(google, i);
+                if (ip == null) {
+                    break;
+                }
+                textBox10.Text = textBox10.Text + "\r\n" + ip.ToString();                
+            }
+            textBox10.Text = textBox10.Text + "\r\n" + "\r\n" + "First IP is router, second is ISP";
+        }
+
+        private IPAddress GetTraceRoute(IPAddress google, int i) {
+            const string Data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            Ping pinger = new Ping();
+            PingOptions pingerOptions = new PingOptions(i, true);
+            int timeout = 10000;
+            byte[] buffer = Encoding.ASCII.GetBytes(Data);
+            PingReply reply = default(PingReply);
+
+            reply = pinger.Send(google, timeout, buffer, pingerOptions);
+
+            List<IPAddress> result = new List<IPAddress>();
+            if (reply.Status == IPStatus.Success || reply.Status == IPStatus.TtlExpired) {
+                return reply.Address;
+            }
+            else {
+                return null;
+            }
+        }
 
         private void GetLocalInformation() {
             textBox6.Text = "Localhost: " + hostName;
@@ -39,6 +70,7 @@ namespace Lan_Monitor {
                     textBox7.Text = textBox7.Text + "  Total size of drive: " + d.TotalSize + " bytes" + "\r\n";
                 }
             }
+            TraceRoute();//https://stackoverflow.com/questions/142614/traceroute-and-ping-in-c-sharp
         }
 
         private void Button1_Click(object sender, EventArgs e) {

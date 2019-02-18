@@ -43,6 +43,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button5 = new System.Windows.Forms.Button();
+            this.textBox10 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -231,12 +232,25 @@
             this.button5.Text = "Ping 8.8.8.8";
             this.button5.UseVisualStyleBackColor = true;
             // 
+            // textBox10
+            // 
+            this.textBox10.Location = new System.Drawing.Point(172, 174);
+            this.textBox10.Multiline = true;
+            this.textBox10.Name = "textBox10";
+            this.textBox10.ReadOnly = true;
+            this.textBox10.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox10.Size = new System.Drawing.Size(139, 169);
+            this.textBox10.TabIndex = 23;
+            this.textBox10.Text = "Tracert Result:";
+            this.textBox10.WordWrap = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(934, 561);
+            this.Controls.Add(this.textBox10);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button4);
@@ -288,6 +302,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.TextBox textBox10;
     }
 }
 
